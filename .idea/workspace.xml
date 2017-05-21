@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fdc248e8-29c0-4320-a2e4-4eaf51e5c7e0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+    <list default="true" id="fdc248e8-29c0-4320-a2e4-4eaf51e5c7e0" name="Default" comment="rename package, add runArg, and UntilArg, fix scheduleteset">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Events/Until.kt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tests/GeneratorTest.kt" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Events/Cache.kt" afterPath="$PROJECT_DIR$/src/Schedule/Cache.kt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Events/Event.kt" afterPath="$PROJECT_DIR$/src/Schedule/Event.kt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Events/EventCounter.kt" afterPath="$PROJECT_DIR$/src/Schedule/EventCounter.kt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Events/GameEvents.kt" afterPath="$PROJECT_DIR$/src/Schedule/GameEvents.kt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Events/Schedule.kt" afterPath="$PROJECT_DIR$/src/Schedule/Schedule.kt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/Events/CachedTest.kt" afterPath="$PROJECT_DIR$/tests/Schedule/CachedTest.kt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/Events/EventCounterTest.kt" afterPath="$PROJECT_DIR$/tests/Schedule/EventCounterTest.kt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/Events/EventTest.kt" afterPath="$PROJECT_DIR$/tests/Schedule/EventTest.kt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/tests/Events/ScheduleTest.kt" afterPath="$PROJECT_DIR$/tests/Schedule/ScheduleTest.kt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -19,93 +31,89 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GameEvents.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Events/GameEvents.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Cache.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Events/Cache.kt">
+        <entry file="file://$PROJECT_DIR$/src/Schedule/Cache.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="52" lean-forward="false" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
+            <state relative-caret-position="255">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Until.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Events/Until.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="63" lean-forward="false" selection-start-line="2" selection-start-column="63" selection-end-line="2" selection-end-column="63" />
-              <folding />
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="452">
+                <caret line="138" column="3" lean-forward="false" selection-start-line="138" selection-start-column="3" selection-end-line="138" selection-end-column="3" />
+                <folding>
+                  <marker date="1495377307526" expanded="true" signature="1772:1813" ph="{...}" />
+                  <marker date="1495377307526" expanded="true" signature="2953:3077" ph="{...}" />
+                  <marker date="1495377307526" expanded="true" signature="3337:3522" ph="{...}" />
+                </folding>
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Schedule.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Events/Schedule.kt">
+      <file leaf-file-name="Schedule.kt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Schedule/Schedule.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="153">
+              <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="ScheduleTest.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/Events/ScheduleTest.kt">
+        <entry file="file://$PROJECT_DIR$/tests/Schedule/ScheduleTest.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
-              <caret line="54" column="1" lean-forward="false" selection-start-line="54" selection-start-column="1" selection-end-line="54" selection-end-column="1" />
+            <state relative-caret-position="244">
+              <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
               <folding>
-                <element signature="e#16#60#0" expanded="true" />
+                <element signature="e#18#62#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="58" column="19" lean-forward="true" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
+            <state relative-caret-position="986">
+              <caret line="58" column="19" lean-forward="false" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="CachedTest.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/Events/CachedTest.kt">
+        <entry file="file://$PROJECT_DIR$/tests/Schedule/CachedTest.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="7" column="6" lean-forward="false" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-              <folding>
-                <element signature="e#16#87#0" expanded="true" />
-                <marker date="1495320936942" expanded="false" signature="23:65" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EventCounterTest.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/Events/EventCounterTest.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1309">
-              <caret line="81" column="20" lean-forward="false" selection-start-line="81" selection-start-column="20" selection-end-line="81" selection-end-column="20" />
+            <state relative-caret-position="459">
+              <caret line="27" column="5" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="27" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="EventCounterTest.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/Schedule/EventCounterTest.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="10" column="19" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="10" selection-end-column="19" />
+              <folding>
+                <element signature="e#18#63#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Event.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Events/Event.kt">
+        <entry file="file://$PROJECT_DIR$/src/Schedule/Event.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1292">
               <caret line="76" column="8" lean-forward="false" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
@@ -115,13 +123,11 @@
         </entry>
       </file>
       <file leaf-file-name="EventTest.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/Events/EventTest.kt">
+        <entry file="file://$PROJECT_DIR$/tests/Schedule/EventTest.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-              <folding>
-                <element signature="e#16#86#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="493">
+              <caret line="31" column="22" lean-forward="false" selection-start-line="28" selection-start-column="8" selection-end-line="31" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -157,11 +163,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Information/Grids/Abstract/GridStrength.scala" />
-        <option value="$PROJECT_DIR$/src/ProxyBwapi/UnitTracking/ForeignUnitTracker.scala" />
-        <option value="$PROJECT_DIR$/src/Utilities/EnrichPosition.scala" />
-        <option value="$PROJECT_DIR$/src/Information/Grids/Concrete/package.scala" />
-        <option value="$PROJECT_DIR$/src/Information/Grids/Concrete/GridPheromone.scala" />
         <option value="$PROJECT_DIR$/src/Events/GameEvents.scala" />
         <option value="$PROJECT_DIR$/src/Geometry/Shapes/Circle.scala" />
         <option value="$PROJECT_DIR$/src/Debugging/EventPrinter.scala" />
@@ -204,10 +205,15 @@
         <option value="$PROJECT_DIR$/tests/GeneratorTest.kt" />
         <option value="$PROJECT_DIR$/src/Events/Schedule.kt" />
         <option value="$PROJECT_DIR$/tests/Events/ScheduleTest.java" />
-        <option value="$PROJECT_DIR$/src/Events/Until.kt" />
         <option value="$PROJECT_DIR$/src/Events/Event.kt" />
         <option value="$PROJECT_DIR$/tests/Events/ScheduleTest.kt" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/Events/Until.kt" />
+        <option value="$PROJECT_DIR$/src/Schedule/Cache.kt" />
+        <option value="$PROJECT_DIR$/src/Schedule/Until.kt" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/Schedule/Schedule.kt" />
+        <option value="$PROJECT_DIR$/tests/Schedule/ScheduleTest.kt" />
       </list>
     </option>
   </component>
@@ -249,8 +255,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -263,8 +267,60 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nigelkot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nigelkot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Schedule" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nigelkot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nigelkot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Schedule" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nigelkot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nigelkot" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -316,11 +372,11 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="nigelkotlin" />
+      <module name="nigelkot" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="Events" />
-      <option name="MAIN_CLASS_NAME" value="Events.EventTest" />
+      <option name="PACKAGE_NAME" value="Schedule" />
+      <option name="MAIN_CLASS_NAME" value="Schedule.EventTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -342,11 +398,11 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="nigelkotlin" />
+      <module name="nigelkot" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="Events" />
-      <option name="MAIN_CLASS_NAME" value="Events.EventCounterTest" />
+      <option name="PACKAGE_NAME" value="Schedule" />
+      <option name="MAIN_CLASS_NAME" value="Schedule.EventCounterTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -363,11 +419,11 @@
     </configuration>
     <configuration default="false" name="CachedTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="nigelkotlin" />
+      <module name="nigelkot" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="Events" />
-      <option name="MAIN_CLASS_NAME" value="Events.CachedTest" />
+      <option name="PACKAGE_NAME" value="Schedule" />
+      <option name="MAIN_CLASS_NAME" value="Schedule.CachedTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -405,11 +461,11 @@
     </configuration>
     <configuration default="false" name="ScheduleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="nigelkotlin" />
+      <module name="nigelkot" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="Events" />
-      <option name="MAIN_CLASS_NAME" value="Events.ScheduleTest" />
+      <option name="PACKAGE_NAME" value="Schedule" />
+      <option name="MAIN_CLASS_NAME" value="Schedule.ScheduleTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -716,12 +772,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="GeneratorTest - 2017.05.20 at 19h 52m 33s.xml">
-      <configuration name="GeneratorTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GeneratorTest - 2017.05.20 at 19h 54m 08s.xml">
-      <configuration name="GeneratorTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="ScheduleTest - 2017.05.20 at 22h 06m 53s.xml">
       <configuration name="ScheduleTest" configurationId="JUnit" />
     </history-entry>
@@ -746,14 +796,21 @@
     <history-entry file="ScheduleTest - 2017.05.21 at 07h 43m 48s.xml">
       <configuration name="ScheduleTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="ScheduleTest - 2017.05.21 at 09h 39m 51s.xml">
+      <configuration name="ScheduleTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ScheduleTest - 2017.05.21 at 09h 40m 24s.xml">
+      <configuration name="ScheduleTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="9" y="9" width="1364" height="726" extended-state="1" />
+    <frame x="9" y="9" width="1364" height="726" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3262987" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -779,13 +836,16 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3262987" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="rename package, add runArg, and UntilArg, fix scheduleteset" />
+    <option name="LAST_COMMIT_MESSAGE" value="rename package, add runArg, and UntilArg, fix scheduleteset" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -808,7 +868,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Information/Grids/Concrete/GridTarget.scala" />
     <entry file="file://$PROJECT_DIR$/src/Information/Grids/Concrete/GridUnits.scala" />
     <entry file="file://$PROJECT_DIR$/src/Information/Grids/Concrete/GridMystery.scala" />
     <entry file="file://$PROJECT_DIR$/src/Information/Grids/Grids.scala" />
@@ -860,13 +919,11 @@
     <entry file="file://$PROJECT_DIR$/src/Startup/Main.scala" />
     <entry file="file://$PROJECT_DIR$/src/Startup/Listener.scala" />
     <entry file="file://$PROJECT_DIR$/tests/EventTests.kt" />
-    <entry file="file://$PROJECT_DIR$/tests/Events/EventTest.kt">
+    <entry file="file://$PROJECT_DIR$/tests/Schedule/EventTest.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="1" />
-          <folding>
-            <element signature="e#16#86#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -891,7 +948,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Events/EventCounter.kt">
+    <entry file="file://$PROJECT_DIR$/src/Schedule/EventCounter.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="35" column="25" lean-forward="false" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
@@ -942,14 +999,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/kotlinc.xml" />
-    <entry file="file://$PROJECT_DIR$/tests/GeneratorTest.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="13" column="9" lean-forward="false" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Events/GameEvents.kt">
+    <entry file="file://$PROJECT_DIR$/src/Schedule/GameEvents.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
@@ -957,31 +1007,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Events/Until.kt">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="63" lean-forward="false" selection-start-line="2" selection-start-column="63" selection-end-line="2" selection-end-column="63" />
+        <state relative-caret-position="986">
+          <caret line="58" column="19" lean-forward="false" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Events/Schedule.kt">
+    <entry file="file://$PROJECT_DIR$/tests/Schedule/EventTest.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="493">
+          <caret line="31" column="22" lean-forward="false" selection-start-line="28" selection-start-column="8" selection-end-line="31" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Events/Cache.kt">
+    <entry file="file://$PROJECT_DIR$/tests/Schedule/EventCounterTest.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="8" column="52" lean-forward="false" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
+          <caret line="10" column="19" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="10" selection-end-column="19" />
+          <folding>
+            <element signature="e#18#63#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Schedule/CachedTest.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="5" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="27" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Events/Event.kt">
+    <entry file="file://$PROJECT_DIR$/src/Schedule/Event.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1292">
           <caret line="76" column="8" lean-forward="false" selection-start-line="76" selection-start-column="8" selection-end-line="76" selection-end-column="8" />
@@ -989,49 +1049,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Events/CachedTest.kt">
+    <entry file="file://$PROJECT_DIR$/src/Schedule/Cache.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="6" lean-forward="false" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-          <folding>
-            <element signature="e#16#87#0" expanded="true" />
-            <marker date="1495320936942" expanded="false" signature="23:65" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Events/EventCounterTest.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1309">
-          <caret line="81" column="20" lean-forward="false" selection-start-line="81" selection-start-column="20" selection-end-line="81" selection-end-column="20" />
+        <state relative-caret-position="255">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Events/EventTest.kt">
+    <entry file="file://$PROJECT_DIR$/src/Schedule/Until.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        <state relative-caret-position="34">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="55" lean-forward="false" selection-start-line="7" selection-start-column="55" selection-end-line="7" selection-end-column="55" />
           <folding>
-            <element signature="e#16#86#0" expanded="true" />
+            <marker date="1495377307526" expanded="true" signature="1772:1813" ph="{...}" />
+            <marker date="1495377307526" expanded="true" signature="2953:3077" ph="{...}" />
+            <marker date="1495377307526" expanded="true" signature="3337:3522" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="452">
+            <caret line="138" column="3" lean-forward="false" selection-start-line="138" selection-start-column="3" selection-end-line="138" selection-end-column="3" />
+            <folding>
+              <marker date="1495377307526" expanded="true" signature="1772:1813" ph="{...}" />
+              <marker date="1495377307526" expanded="true" signature="2953:3077" ph="{...}" />
+              <marker date="1495377307526" expanded="true" signature="3337:3522" ph="{...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/GeneratorTest.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="13" column="9" lean-forward="false" selection-start-line="13" selection-start-column="9" selection-end-line="13" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Schedule/ScheduleTest.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="51" column="21" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="21" />
+          <folding>
+            <element signature="e#18#62#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/Events/ScheduleTest.kt">
+    <entry file="file://$PROJECT_DIR$/src/Schedule/Schedule.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="54" column="1" lean-forward="false" selection-start-line="54" selection-start-column="1" selection-end-line="54" selection-end-column="1" />
-          <folding>
-            <element signature="e#16#60#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="58" column="19" lean-forward="true" selection-start-line="58" selection-start-column="19" selection-end-line="58" selection-end-column="19" />
+        <state relative-caret-position="153">
+          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
           <folding />
         </state>
       </provider>

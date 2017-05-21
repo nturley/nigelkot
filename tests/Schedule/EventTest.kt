@@ -1,4 +1,4 @@
-package Events
+package Schedule
 
 import org.junit.After
 import org.junit.Assert.*

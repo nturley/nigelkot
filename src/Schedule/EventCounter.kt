@@ -1,4 +1,4 @@
-package Events
+package Schedule
 
 
 class EventCounter(event: Event<Unit>, val n:Int) {

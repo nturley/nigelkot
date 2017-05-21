@@ -1,4 +1,4 @@
-package Events
+package Schedule
 
 /**
  * Collects subscribers that are notified whenever an event occurs.

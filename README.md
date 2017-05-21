@@ -5,7 +5,7 @@ Here's some of the tools I've got
 
 # Events
 
-Events allow you (the subscriber) to be notified everytime an event is fired (usually by a publisher).
+Events allow you (the subscriber) to be notified every time an event is fired (usually by a publisher).
 
 This is useful for subscribing to BWAPI events (unit created, unit destroyed, etc), and it's easy to create derived events (myUnitDestroyed, foundEnemyBase)
 
@@ -86,6 +86,8 @@ With coroutines, you can just write a single sequence of steps in a single funct
 
 If you want to abandon a coroutine before it's next event fires, simply unsubscribe the label from the event.
 
+You use it by calling Schedule.run with your function and yielding Until's. The Until instance specifies when to resume this function.
+
 Example
 ```kotlin
 val e : Event<Unit> = Event("e")
@@ -108,3 +110,30 @@ e()
 assert(a == 6)
 ```
 
+If your event has an argument and you want to add conditions to that argument, use runArg and UntilArg
+
+```kotlin
+val e1 : Event<Int> = Event("e1")
+var a : Int = 0
+Schedule.runArg {
+    a += 1
+    yield (UntilArg("a",e1, condition= {i:Int -> i == 47}))
+    a += 2
+    yield (UntilArg("b",e1, condition= {i:Int -> i == 12}))
+    a += 3
+    yield (UntilArg("c",e1))
+}
+assert (a == 1)
+e1(0)
+assert(a == 1)
+e1(47)
+assert(a == 3)
+e1(47)
+assert(a == 3)
+e1(12)
+assert(a == 6)
+```
+
+I'm still trying to figure out how to have a schedule.run that can yield Until objects whose event arguments are all of different types.
+
+Until I do, all yields in a run must have the same event arg type. Which is annoying but probably acceptable for many use cases.

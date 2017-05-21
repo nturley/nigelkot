@@ -1,4 +1,4 @@
-package Events
+package Schedule
 
 class GameEvents {
     val start : Event<Unit> = Event("Start")
