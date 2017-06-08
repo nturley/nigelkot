@@ -92,7 +92,7 @@ This is really neat. Typically, agents have a sequence of steps to accomplish a 
 
 With coroutines, you can just write a single sequence of steps in a single function and function locals are saved and restored while the function is suspended.
 
-If you want to abandon a coroutine before it's next event fires, simply unsubscribe the label.
+Coroutines leverage events for resumption. To abandon a coroutine, just unsubscribe its label.
 
 You use it by calling Schedule.run with your function and yielding Until's. The Until instance specifies when to resume this function.
 
@@ -119,7 +119,7 @@ fun example() {
 }
 ```
 
-If your event has an argument and you want to add conditions to that argument, use run and UntilArg
+you can add conditions to your Untils and use the event argument
 
 ```kotlin
 fun exampleArg() {
