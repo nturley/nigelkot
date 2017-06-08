@@ -17,7 +17,7 @@ class UnitTracker(unitEvents: List <Pair <Event <bwapi.Unit?>, Event <UnitInfo> 
                     val unitInfo = knownUnits.getOrPut(id, { UnitInfo(id, u) })
                     pair.second(unitInfo)
                 }
-            }, priority = 100)
+            }, priority = Event.OBSERVE)
         }
     }
     val myUnits : List<UnitInfo>

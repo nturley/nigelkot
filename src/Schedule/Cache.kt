@@ -3,7 +3,7 @@ package Schedule
 class Cached<out T> (private val get: () -> T, event: iEvent = Event.Never) {
     private var t : T? = null
     init {
-        event.subscribe("cache", {t = null})
+        event.subscribe("cache", {t = null}, priority = Event.CACHE_REFRESH)
     }
     operator fun invoke(): T {
         // convincing the compiler that this is safe

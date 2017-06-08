@@ -14,6 +14,8 @@ class Event<T>(label:String) : iEvent(label) {
     companion object {
         val DERIVED_EVENT : Int = -100
         val CACHE_REFRESH : Int = -99
+        val CLEANUP_DATA : Int = -98
+        val OBSERVE : Int = 100
 
         val Never : Event<Unit> = Event("never")
     }
