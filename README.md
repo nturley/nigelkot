@@ -146,7 +146,7 @@ fun exampleArg() {
 
 All Untils that are yielded from a run must be the same type. The type of the Until is argument of the Event.
 
-You can work around this limitation by using "then" to chain together Schedule.run blocks
+You can work around this limitation by using "then" to chain together coroutine blocks
 
 ```kotlin
 import Schedule
@@ -155,10 +155,10 @@ fun chain() {
         run("a") {
             yield(Until(e))
             a+=1
-        } then { run("b") {
+        } then {
             yield(Until(e1))
             a+=2
-        }}
+        }
         e(Unit)
         assert(a==1)
         e1(5)

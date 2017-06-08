@@ -4,15 +4,19 @@ import kotlin.coroutines.experimental.*
 
 data class Until<T>(val event:Event<T>, val condition: (T) -> Boolean = { _-> true})
 
-class RunHandle {
+class RunHandle (val label:String) {
+    var nextHandle: RunHandle? = null
     var nextAction = {}
-    infix fun then (action:()->Unit) {
-        nextAction = action
+    infix fun <T>then (action :suspend SequenceBuilder<Until<T>>.() -> Unit) : RunHandle {
+        val ret = RunHandle(label)
+        nextHandle = ret
+        nextAction = { getNextYieldArg(buildIterator(action), label, ret)}
+        return ret
     }
 }
 
 fun <T> run(label:String, action: suspend SequenceBuilder<Until<T>>.() -> Unit) : RunHandle {
-    val runHandle = RunHandle()
+    val runHandle = RunHandle(label)
     getNextYieldArg(buildIterator(action), label, runHandle)
     return runHandle
 }

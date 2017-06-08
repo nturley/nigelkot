@@ -82,16 +82,21 @@ class ScheduleTest {
             a+=1
             yield(Until(e))
             a+=2
-        } then {run("b") {
+        } then {
             a+=3
             yield(Until(e1))
             a+=4
-        }}
+        } then {
+            yield( Until (e))
+            a+=5
+        }
         assert(a==1)
         e(Unit)
         assert(a==6)
         e1(5)
         assert(a==10)
+        e(Unit)
+        assert(a==15)
     }
 
 }
