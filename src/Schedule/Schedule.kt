@@ -3,9 +3,10 @@ package Schedule
 import kotlin.coroutines.experimental.*
 
 data class Until<T>(val event:Event<T>, val condition: (T) -> Boolean = { _-> true})
+
 class RunHandle {
     var nextAction = {}
-    fun then (action:()->Unit) {
+    infix fun then (action:()->Unit) {
         nextAction = action
     }
 }

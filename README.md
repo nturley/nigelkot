@@ -102,13 +102,13 @@ fun example() {
     val e : Event<Unit> = Event("e")
     var a : Int = 0
     
-    Schedule.run("a", {
+    Schedule.run("a") {
         a += 1
         yield (Until(e))
         a += 2
         yield (Until(e))
         a += 3
-    })
+    }
     assert (a == 1)
     e(Unit)
     assert(a == 3)
@@ -125,13 +125,13 @@ you can add conditions to your Untils and use the event argument
 fun exampleArg() {
     val e1 : Event<Int> = Event("e1")
     var a : Int = 0
-    Schedule.run("a", {
+    Schedule.run("a") {
         a += 1
         yield (Until(e1, {it == 47}))
         a += 2
         yield (Until(e1, {it == 12}))
         a += 3
-    })
+    }
     assert (a == 1)
     e1(0)
     assert(a == 1)
@@ -149,14 +149,16 @@ All Untils that are yielded from a run must be the same type. The type of the Un
 You can work around this limitation by using "then" to chain together Schedule.run blocks
 
 ```kotlin
+import Schedule
+
 fun chain() {
-        Schedule.run("a", {
+        run("a") {
             yield(Until(e))
             a+=1
-        }).then {Schedule.run("b",{
+        } then { run("b") {
             yield(Until(e1))
             a+=2
-        })}
+        }}
         e(Unit)
         assert(a==1)
         e1(5)

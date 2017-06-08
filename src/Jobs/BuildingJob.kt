@@ -16,7 +16,7 @@ object BuildingJob : Job("building", 2) {
         val unitMorphs = With.gameEvents.unitMorph
         val unitCompletes = With.gameEvents.unitComplete
 
-        Schedule.run(myLabel, {
+        Schedule.run(myLabel) {
             println(me + " build")
             val build = With.buildOrderExec.buildQ.pop() as BuildUnit
             With.reserved.add(build.cost())
@@ -60,7 +60,7 @@ object BuildingJob : Job("building", 2) {
                     unitInfo.job = MiningJob
                 }
             }
-        })
+        }
     }
 
     fun getLocationAndCommandBuild(unitInfo: UnitInfo, build:BuildUnit): TilePosition {

@@ -17,7 +17,7 @@ class ScheduleTest {
 
     @Test
     fun basic() {
-        run("a", {
+        run("a") {
             a += 1
             yield (Until(e))
             a += 2
@@ -27,7 +27,7 @@ class ScheduleTest {
             a += 4
             yield (Until(Event.Never))
             a += 5
-        })
+        }
         assert (a==1)
         e(Unit)
         assert(a==3)
@@ -41,12 +41,12 @@ class ScheduleTest {
 
     @Test
     fun condition() {
-        Schedule.run("a", {
+        Schedule.run("a") {
             while (true) {
                 yield( Until(e, condition= { a > 3 }))
                 a=1
             }
-        })
+        }
         assert(a==0)
         e(Unit)
         assert(a==0)
@@ -57,14 +57,14 @@ class ScheduleTest {
 
     @Test
     fun conditionArgument() {
-        Schedule.run("a", {
+        Schedule.run("a") {
             a += 1
             yield (Until(e1, condition= { i:Int -> i==47}))
             a += 2
             yield (Until(e1, condition= { i:Int -> i==12}))
             a += 3
             yield (Until(e1))
-        })
+        }
         assert (a==1)
         e1(0)
         assert(a==1)
@@ -78,15 +78,15 @@ class ScheduleTest {
 
     @Test
     fun chain() {
-        run("a", {
+        run("a") {
             a+=1
             yield(Until(e))
             a+=2
-        }).then {run("b",{
+        } then {run("b") {
             a+=3
             yield(Until(e1))
             a+=4
-        })}
+        }}
         assert(a==1)
         e(Unit)
         assert(a==6)
