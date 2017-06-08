@@ -1,9 +1,8 @@
 package Schedule
 
 
-class EventCounter(event: Event<Unit>, val n:Int) {
+class EventCounter(event: iEvent, val n:Int) : iEvent(event.label + ":" + n) {
 
-    val label = event.label + ":" + n
     var i : Int = 0
     private var subscriberList : MutableList<Event.Subscriber<Unit>> = mutableListOf()
 
@@ -16,32 +15,34 @@ class EventCounter(event: Event<Unit>, val n:Int) {
         val filtered = subscriberList
                 .filterIndexed { index, _ -> index % n == i }
         for (subscriber in filtered) {
-            subscriber.fire(null)
+            subscriber.fire(Unit)
         }
         i = (i+1)%n
     }
 
-    fun subscribe(
-            label : String,
-            invoke : () -> Unit,
-            condition : () -> Boolean = { true}) {
-        subscriberList.add(Event.Subscriber(label, { _ -> invoke()},{_ -> condition()}, 0, false))
+    override fun subscribe(
+            label: String,
+            invoke: () -> Unit,
+            condition: () -> Boolean,
+            priority: Int,
+            oneShot: Boolean) {
+        subscriberList.add(Event.Subscriber(label, { _ -> invoke()},{_ -> condition()}, priority, oneShot))
     }
 
-    fun unsubscribe(label: String) {
+    override fun unsubscribe(label: String) {
         subscriberList = subscriberList.filter { it.label != label } as MutableList<Event.Subscriber<Unit>>
     }
 
-    fun clear() {
+    override fun clear() {
         subscriberList.clear()
     }
 
     fun derive(label: String, condition: () -> Boolean) : Event<Unit> {
-        val ret = Event<Unit>(label)
+        val ret : Event<Unit> = Event(label)
         subscribe(
                 label,
                 condition = condition,
-                invoke = {ret()})
+                invoke = {ret(Unit)})
         return ret
     }
 }

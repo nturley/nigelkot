@@ -17,38 +17,54 @@ class ScheduleTest {
 
     @Test
     fun basic() {
-        Schedule.run {
+        run("a", {
             a += 1
-            yield (Until("a",e))
+            yield (Until(e))
             a += 2
-            yield (Until("b",e))
+            yield (Until(e))
             a += 3
-            yield (Until("c",e))
+            yield (Until(e))
             a += 4
-            yield (Until("d", Event.Never))
+            yield (Until(Event.Never))
             a += 5
-        }
+        })
         assert (a==1)
-        e()
+        e(Unit)
         assert(a==3)
-        e()
+        e(Unit)
         assert(a==6)
-        e()
+        e(Unit)
         assert(a==10)
-        e()
+        e(Unit)
         assert(a==10)
     }
 
     @Test
+    fun condition() {
+        Schedule.run("a", {
+            while (true) {
+                yield( Until(e, condition= { a > 3 }))
+                a=1
+            }
+        })
+        assert(a==0)
+        e(Unit)
+        assert(a==0)
+        a=4
+        e(Unit)
+        assert(a==1)
+    }
+
+    @Test
     fun conditionArgument() {
-        Schedule.runArg {
+        Schedule.run("a", {
             a += 1
-            yield (UntilArg("a",e1, condition= {i:Int -> i==47}))
+            yield (Until(e1, condition= { i:Int -> i==47}))
             a += 2
-            yield (UntilArg("b",e1, condition= {i:Int -> i==12}))
+            yield (Until(e1, condition= { i:Int -> i==12}))
             a += 3
-            yield (UntilArg("c",e1))
-        }
+            yield (Until(e1))
+        })
         assert (a==1)
         e1(0)
         assert(a==1)
@@ -61,18 +77,21 @@ class ScheduleTest {
     }
 
     @Test
-    fun condition() {
-        Schedule.run {
-            while (true) {
-                yield( Until("a", e, condition= { a > 3 }))
-                a=1
-            }
-        }
-        assert(a==0)
-        e()
-        assert(a==0)
-        a=4
-        e()
+    fun chain() {
+        run("a", {
+            a+=1
+            yield(Until(e))
+            a+=2
+        }).then {run("b",{
+            a+=3
+            yield(Until(e1))
+            a+=4
+        })}
         assert(a==1)
+        e(Unit)
+        assert(a==6)
+        e1(5)
+        assert(a==10)
     }
+
 }

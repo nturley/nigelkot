@@ -9,7 +9,7 @@ package Schedule
  * The condition is evaluated just before invoke is called
  * subscribing and unsubscribing resolves the next time the event fires
  */
-class Event<T>(val label:String) {
+class Event<T>(label:String) : iEvent(label) {
 
     companion object {
         val DERIVED_EVENT : Int = -100
@@ -19,8 +19,8 @@ class Event<T>(val label:String) {
     }
 
     class Subscriber<T>(val label:String,
-                           val invoke : (T?) -> Unit,
-                           val condition : (T?) -> Boolean,
+                           val invoke : (T) -> Unit,
+                           val condition : (T) -> Boolean,
                            val priority : Int,
                            val singleShot : Boolean
     ) : Comparable<Subscriber<T>> {
@@ -31,7 +31,7 @@ class Event<T>(val label:String) {
             return other.priority - priority
         }
 
-        fun fire(argval:T?) {
+        fun fire(argval:T) {
             if (condition(argval)) {
                 invoke(argval)
                 if (singleShot) active = false
@@ -40,21 +40,21 @@ class Event<T>(val label:String) {
     }
 
     fun derive(label: String, condition: () -> Boolean) : Event<Unit> {
-        val ret = Event<Unit>(label)
+        val ret : Event<Unit> = Event(label)
         subscribe(
                 label,
                 condition = condition,
-                invoke = {ret()},
+                invoke = {ret(Unit)},
                 priority = DERIVED_EVENT)
         return ret
     }
 
     fun deriveWithArg(label: String, condition: (T) -> Boolean) : Event<T> {
-        val ret = Event<T>(label)
+        val ret : Event<T> = Event(label)
         subscribeWithArg(
                 label,
                 condition = condition,
-                invoke = {ret()},
+                invoke = {ret(it)},
                 priority = DERIVED_EVENT)
         return ret
     }
@@ -70,7 +70,7 @@ class Event<T>(val label:String) {
      * invoke
      * @param arg arguments for this event firing
      */
-    operator fun invoke(arg: T? = null) {
+    operator fun invoke(arg: T) {
         val filtered = subscriberList
                 .filter { it.active }
                 .sorted()
@@ -96,10 +96,10 @@ class Event<T>(val label:String) {
                             condition : (T) -> Boolean = {_ -> true},
                             priority : Int = 0,
                             oneShot : Boolean = false) {
-        val s = Subscriber<T>(
+        val s = Subscriber(
                 label,
-                {t:T? -> if (t!= null) invoke(t)},
-                { t:T? -> if (t!=null) condition(t) else false },
+                invoke,
+                condition,
                 priority,
                 oneShot)
         subscriberList.add(s)
@@ -114,12 +114,12 @@ class Event<T>(val label:String) {
      * @param priority higher priority subscriptions will be invoked before lower
      * @param oneShot indicates whether the subscriber should be removed after calling invoke
      */
-    fun subscribe(
+    override fun subscribe(
             label : String,
             invoke : () -> Unit,
-            condition : () -> Boolean = { true},
-            priority : Int = 0,
-            oneShot : Boolean = false) {
+            condition : () -> Boolean,
+            priority : Int,
+            oneShot : Boolean) {
         subscriberList.add(Subscriber(label, { _ -> invoke()},{_ -> condition()}, priority, oneShot))
     }
 
@@ -127,14 +127,14 @@ class Event<T>(val label:String) {
      * Removes all subscriptions whose label is equal to withLabel
      * @param label the label to compare against
      */
-    fun unsubscribe(label : String) {
+    override fun unsubscribe(label : String) {
         subscriberList = subscriberList.filter { it.label != label } as MutableList<Subscriber<T>>
     }
 
     /**
      * Removes all subscriptions
      */
-    fun clear() {
+    override fun clear() {
         subscriberList = mutableListOf()
     }
 

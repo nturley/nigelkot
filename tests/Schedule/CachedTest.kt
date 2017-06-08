@@ -18,12 +18,12 @@ class CachedTest {
         assert(c()==1)
         assert(a==1)
         assert(c()==1)
-        e()
+        e(Unit)
         assert(a==1)
         assert(c()==2)
         assert(a==2)
-        e()
-        e()
+        e(Unit)
+        e(Unit)
         assert(c()==3)
     }
 

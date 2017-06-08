@@ -21,7 +21,7 @@ class EventCounterTest {
     fun basic2() {
         e2.subscribe("a", {a+=1})
         assert(a==0)
-        for (i in 1..4) e()
+        for (i in 1..4) e(Unit)
         assert(a==2)
     }
 
@@ -29,7 +29,7 @@ class EventCounterTest {
     fun basic3() {
         e3.subscribe("a", {a+=1})
         assert(a==0)
-        for (i in 1..6) e()
+        for (i in 1..6) e(Unit)
         assert(a==2)
     }
 
@@ -40,7 +40,7 @@ class EventCounterTest {
                 condition={a<2},
                 invoke = {a+=1})
         assert(a==0)
-        for (i in 1..10) e()
+        for (i in 1..10) e(Unit)
         assert(a==2)
     }
 
@@ -49,12 +49,12 @@ class EventCounterTest {
         val d = e2.derive("d", {a==2})
         d.subscribe("d", {a=10})
         assert(a==0)
-        e()
-        e()
+        e(Unit)
+        e(Unit)
         assert(a==0)
         a=2
-        e()
-        e()
+        e(Unit)
+        e(Unit)
         assert(a==10)
         d.clear()
     }
@@ -64,10 +64,10 @@ class EventCounterTest {
         e2.subscribe("a", {a+=1})
         e2.subscribe("b", {a+=1})
         assert(a==0)
-        for (i in 1..4) e()
+        for (i in 1..4) e(Unit)
         assert(a==4)
         e2.unsubscribe("a")
-        for (i in 1..4) e()
+        for (i in 1..4) e(Unit)
         assert(a==6)
     }
 
@@ -76,10 +76,10 @@ class EventCounterTest {
         e2.subscribe("a", {a+=1})
         e2.subscribe("b", {a+=1})
         assert(a==0)
-        for (i in 1..4) e()
+        for (i in 1..4) e(Unit)
         assert(a==4)
         e2.clear()
-        for (i in 1..4) e()
+        for (i in 1..4) e(Unit)
         assert(a==4)
     }
 

@@ -18,22 +18,26 @@ Events can be cleared or you can unsubscribe all subscriptions with a label.
 
 Example
 ```kotlin
-val e:Event<Unit> = Event("e")
-var a:Int = 0
-e.subscribe("a", {a = 1})
-assert(a==0)
-e()
-assert(a==1)
+fun simpleExample () {
+    val e:Event<Unit> = Event("e")
+    var a:Int = 0
+    e.subscribe("a", {a = 1})
+    assert(a==0)
+    e(Unit)
+    assert(a==1)
+}
 ```
 
 Argument Example
 ```kotlin
-val e:Event<Int> = Event("e")
-var a:Int = 0
-e.subscribeWithArg("a", { i:Int -> a = i})
-assert(a==0)
-e(2)
-assert(a==2)
+fun argExample() {
+    val e:Event<Int> = Event("e")
+    var a:Int = 0
+    e.subscribeWithArg("a", { i:Int -> a = i})
+    assert(a==0)
+    e(2)
+    assert(a==2)
+}
 ```
 
 # Event Counter
@@ -43,13 +47,15 @@ Sometimes, you want something to occur on an event, but not every single event (
 
 Example
 ```kotlin
-val e : Event<Unit> = Event("e")
-val e3 : EventCounter = EventCounter(e,3)
-var a : Int = 0
-e3.subscribe("a", { a += 1 })
-assert(a == 0)
-for (i in 1..6) e()
-assert(a == 2)
+fun example() {
+    val e : Event<Unit> = Event("e")
+    val e3 : EventCounter = EventCounter(e,3)
+    var a : Int = 0
+    e3.subscribe("a", { a += 1 })
+    assert(a == 0)
+    for (i in 1..6) e(Unit)
+    assert(a == 2)
+}
 ```
 
 # Cached
@@ -57,23 +63,25 @@ This class caches a value that is invalidated on an event. This is useful for av
 
 Example
 ```kotlin
-val e : Event<Unit> = Event("e")
-var accesses : Int = 0
-val accessCache : Cached<Int> = Cached({ access() }, e)
-
 fun access() :Int {
     accesses += 1
     return accesses
 }
 
-assert( accesses == 0)
-assert( accessCache() == 1)
-assert( accesses == 1)
-assert( accessCache() == 1)
-e()
-assert( acesses == 1)
-assert( accessCache() == 2)
-assert( acesses == 2)
+fun example() {
+    val e : Event<Unit> = Event("e")
+    var accesses : Int = 0
+    val accessCache : Cached<Int> = Cached({ access() }, e)
+    
+    assert( accesses == 0)
+    assert( accessCache() == 1)
+    assert( accesses == 1)
+    assert( accessCache() == 1)
+    e(Unit)
+    assert( acesses == 1)
+    assert( accessCache() == 2)
+    assert( acesses == 2)
+}
 ```
 
 # Schedule.run
@@ -84,56 +92,74 @@ This is really neat. Typically, agents have a sequence of steps to accomplish a 
 
 With coroutines, you can just write a single sequence of steps in a single function and function locals are saved and restored while the function is suspended.
 
-If you want to abandon a coroutine before it's next event fires, simply unsubscribe the label from the event.
+If you want to abandon a coroutine before it's next event fires, simply unsubscribe the label.
 
 You use it by calling Schedule.run with your function and yielding Until's. The Until instance specifies when to resume this function.
 
 Example
 ```kotlin
-val e : Event<Unit> = Event("e")
-var a : Int = 0
-
-Schedule.run {
-    a += 1
-    yield (Until("a", e))
-    a += 2
-    yield (Until("a", e))
-    a += 3
-    yield (Until("a", Event.Never))
+fun example() {
+    val e : Event<Unit> = Event("e")
+    var a : Int = 0
+    
+    Schedule.run("a", {
+        a += 1
+        yield (Until(e))
+        a += 2
+        yield (Until(e))
+        a += 3
+    })
+    assert (a == 1)
+    e(Unit)
+    assert(a == 3)
+    e(Unit) 
+    assert(a == 6)
+    e(Unit)
+    assert(a == 6)
 }
-assert (a == 1)
-e()
-assert(a == 3)
-e() 
-assert(a == 6)
-e()
-assert(a == 6)
 ```
 
-If your event has an argument and you want to add conditions to that argument, use runArg and UntilArg
+If your event has an argument and you want to add conditions to that argument, use run and UntilArg
 
 ```kotlin
-val e1 : Event<Int> = Event("e1")
-var a : Int = 0
-Schedule.runArg {
-    a += 1
-    yield (UntilArg("a",e1, condition= {i:Int -> i == 47}))
-    a += 2
-    yield (UntilArg("b",e1, condition= {i:Int -> i == 12}))
-    a += 3
-    yield (UntilArg("c",e1))
+fun exampleArg() {
+    val e1 : Event<Int> = Event("e1")
+    var a : Int = 0
+    Schedule.run("a", {
+        a += 1
+        yield (Until(e1, {it == 47}))
+        a += 2
+        yield (Until(e1, {it == 12}))
+        a += 3
+    })
+    assert (a == 1)
+    e1(0)
+    assert(a == 1)
+    e1(47)
+    assert(a == 3)
+    e1(47)
+    assert(a == 3)
+    e1(12)
+    assert(a == 6)
 }
-assert (a == 1)
-e1(0)
-assert(a == 1)
-e1(47)
-assert(a == 3)
-e1(47)
-assert(a == 3)
-e1(12)
-assert(a == 6)
 ```
 
-I'm still trying to figure out how to have a schedule.run that can yield Until objects whose event arguments are all of different types.
+All Untils that are yielded from a run must be the same type. The type of the Until is argument of the Event.
 
-Until I do, all yields in a run must have the same event arg type. Which is annoying but probably acceptable for many use cases.
+You can work around this limitation by using "then" to chain together Schedule.run blocks
+
+```kotlin
+fun chain() {
+        Schedule.run("a", {
+            yield(Until(e))
+            a+=1
+        }).then {Schedule.run("b",{
+            yield(Until(e1))
+            a+=2
+        })}
+        e(Unit)
+        assert(a==1)
+        e1(5)
+        assert(a==3)
+    }
+```

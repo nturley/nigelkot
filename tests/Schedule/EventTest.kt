@@ -20,7 +20,7 @@ class EventTest {
     fun basic() {
         e.subscribe("a", {a = 1})
         assertTrue(a == 0)
-        e()
+        e(Unit)
         assertTrue(a == 1)
     }
 
@@ -39,11 +39,11 @@ class EventTest {
                 condition = {a < 2},
                 invoke = {a += 1})
         assert(a == 0)
-        e()
+        e(Unit)
         assert(a == 1)
-        e()
+        e(Unit)
         assert(a == 2)
-        e()
+        e(Unit)
         assert(a == 2)
     }
 
@@ -64,9 +64,9 @@ class EventTest {
     fun oneShot() {
         e.subscribe("a", {a+=1}, oneShot = true)
         assert(a == 0)
-        e()
-        e()
-        e()
+        e(Unit)
+        e(Unit)
+        e(Unit)
         assert(a == 1)
     }
 
@@ -76,7 +76,7 @@ class EventTest {
         e.subscribe("a2", {a+=1})
         assert(a==0)
         e.clear()
-        e()
+        e(Unit)
         assert(a==0)
     }
 
@@ -86,7 +86,7 @@ class EventTest {
         e.subscribe("a2", {a+=1})
         assert(a==0)
         e.unsubscribe("a1")
-        e()
+        e(Unit)
         assert(a==1)
     }
 
@@ -98,7 +98,7 @@ class EventTest {
         e.subscribe("-1",{a=2}, priority=-1)
         e.subscribe("1", {a=1}, priority = 1)
         assert(a==0)
-        e()
+        e(Unit)
         assert(a==2)
     }
 
@@ -107,9 +107,9 @@ class EventTest {
         val d = e.derive("d", {a<2})
         d.subscribe("d", {a+=1})
         assert(a==0)
-        e()
-        e()
-        e()
+        e(Unit)
+        e(Unit)
+        e(Unit)
         assert(a==2)
     }
 
