@@ -10,5 +10,4 @@ abstract class iEvent(val label: String) {
             condition : () -> Boolean = { true},
             priority : Int = 0,
             oneShot : Boolean = false)
-
 }

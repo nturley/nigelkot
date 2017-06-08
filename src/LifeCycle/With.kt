@@ -36,6 +36,7 @@ object With {
         buildOrderExec = BuildOrderExec()
         assignWorkers()
         Configuration.checkToggles()
+        Tracking.removeDeadUnits()
     }
 
     val unitTracker:UnitTracker
