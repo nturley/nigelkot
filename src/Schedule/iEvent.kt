@@ -4,6 +4,7 @@ package Schedule
 abstract class iEvent(val label: String) {
     abstract fun clear()
     abstract fun unsubscribe(label:String)
+    open fun init() {}
     abstract fun subscribe(
             label : String,
             invoke : () -> Unit,

@@ -1,7 +1,7 @@
 package Jobs
 
 import BwapiWrappers.UnitInfo
-import LifeCycle.With
+import Schedule.GameEvents
 
 abstract class Job (val label:String, val priority:Int) {
     open fun label(unitInfo: UnitInfo):String {
@@ -9,8 +9,9 @@ abstract class Job (val label:String, val priority:Int) {
     }
     open fun start(unitInfo: UnitInfo) {}
     open fun stop(unitInfo:UnitInfo) {
-        With.gameEvents.events.forEach { it.unsubscribe(label(unitInfo)) }
-        With.gameEvents.frame10.unsubscribe(label(unitInfo))
+        GameEvents.events.forEach { it.unsubscribe(label(unitInfo)) }
+        GameEvents.frame10.unsubscribe(label(unitInfo))
+        GameEvents.frame24.unsubscribe(label(unitInfo))
         println(unitInfo.id.toString() + " stop " + label)
     }
 }

@@ -1,15 +1,12 @@
 package Schedule
 
 import BwapiWrappers.UnitInfo
-import LifeCycle.With
-import Tracking.UnitTracker
-import java.util.Arrays.asList
 
 /**
  * This class holds all game events, even
  */
 
-class GameEvents {
+object GameEvents {
     val start : Event<Unit> = Event("Start")
     val frame : Event<Int> = Event("Frame")
     val end : Event<Boolean> = Event("End")
@@ -35,7 +32,7 @@ class GameEvents {
     val unitRenegade : Event<UnitInfo> = Event("UnitRenegade")
     val unitMorph : Event<UnitInfo> = Event("UnitMorph")
 
-    private val unitEvents = listOf(
+    val _unitEvents = listOf(
             Pair(_unitComplete, unitComplete),
             Pair(_unitDestroy, unitDestroy),
             Pair(_unitDiscover, unitDiscover),
@@ -45,14 +42,40 @@ class GameEvents {
             Pair(_unitShow, unitShow),
             Pair(_unitRenegade, unitRenegade),
             Pair(_unitMorph, unitMorph))
-    val unitTracker : UnitTracker = UnitTracker(unitEvents)
 
     val frame10 = EventCounter(frame, 10)
     val frame24 = EventCounter(frame, 24)
     val frame100 = EventCounter(frame, 100)
 
+    val _derivedEvents = listOf(frame10, frame24, frame100)
+
+    val _events : List<iEvent> = listOf(
+            frame,
+            end,
+            sendText,
+            unitComplete,
+            unitDestroy,
+            unitDiscover,
+            unitCreate,
+            unitEvade,
+            unitHide,
+            unitShow,
+            unitRenegade,
+            unitMorph,
+            _unitComplete,
+            _unitDestroy,
+            _unitDiscover,
+            _unitCreate,
+            _unitEvade,
+            _unitHide,
+            _unitShow,
+            _unitRenegade,
+            _unitMorph,
+            frame10,
+            frame24,
+            frame100).filterIsInstance<iEvent>()
+
     val events : List<iEvent> = listOf(
-            start,
             frame,
             end,
             sendText,

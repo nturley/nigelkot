@@ -1,13 +1,12 @@
 package Schedule
 
 
-class EventCounter(event: iEvent, val n:Int) : iEvent(event.label + ":" + n) {
+class EventCounter(val event: iEvent, val n:Int) : iEvent(event.label + ":" + n) {
 
     var i : Int = 0
     private var subscriberList : MutableList<Event.Subscriber<Unit>> = mutableListOf()
 
-    init {
-        assert(n > 1)
+    override fun init() {
         event.subscribe(label, invoke = { fire() }, priority = Event.DERIVED_EVENT)
     }
 

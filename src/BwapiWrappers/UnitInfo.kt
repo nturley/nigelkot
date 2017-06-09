@@ -3,11 +3,7 @@ import BuildOrder.Buildable
 import Jobs.Job
 import Jobs.IdleJob
 
-class UnitInfo (val id:Int, b:bwapi.Unit?) {
-    lateinit var base:bwapi.Unit
-    init {
-        if (b!=null) base = b
-    }
+class UnitInfo (val id:Int, val base :bwapi.Unit) {
 
     var job:Job = IdleJob
         set(value) {

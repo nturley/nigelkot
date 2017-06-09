@@ -1,13 +1,14 @@
 package Debug
 import BwapiWrappers.UnitInfo
-import LifeCycle.With
-import bwapi.Color
+import LifeCycle.AI
+import Schedule.GameEvents
+import Tracking.UnitTracker
 
-class Overlays {
-    init {
-        With.gameEvents.frame.subscribe("overlays", {
-            val g = With.game
-            val myUnits = With.unitTracker.knownUnits.values.filter { it.base.player.id == With.myId }
+object Overlays {
+    fun init() {
+        GameEvents.frame.subscribe("overlays", {
+            val g = AI.game
+            val myUnits = UnitTracker.knownUnits.values.filter { it.base.player.id == AI.myId }
             myUnits.forEach { g.drawTextMap(it.base.left, it.base.bottom, getUnitStr(it)) }
         })
     }

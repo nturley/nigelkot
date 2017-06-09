@@ -1,16 +1,18 @@
 package BuildOrder
 
 import Jobs.BuildingJob
-import LifeCycle.With
+import LifeCycle.AI
+import Schedule.GameEvents
+import Tracking.UnitTracker
 import bwapi.Race
 import bwapi.UnitType
 import java.util.*
 
-class BuildOrderExec {
-
+object BuildOrderExec {
     val buildQ = ArrayDeque<Buildable>()
-    init {
-        when (With.game.self().race) {
+    fun init() {
+        buildQ.clear()
+        when (AI.game.self().race) {
             Race.Terran -> {
                 val worker = BuildUnit(UnitType.Terran_SCV)
                 buildQ.add(worker)
@@ -30,7 +32,7 @@ class BuildOrderExec {
                 buildQ.add(BuildUnit(UnitType.Zerg_Spawning_Pool))
             }
         }
-        With.gameEvents.frame10.subscribe(
+        GameEvents.frame10.subscribe(
                 label="buildQ exec",
                 condition={buildQ.isNotEmpty()},
                 invoke = invoke@ {
@@ -38,9 +40,9 @@ class BuildOrderExec {
                     if (!toBuild.canAfford()) return@invoke
                     if (toBuild.whatBuilds().isWorker) {
                         // find a suitable worker
-                        With.unitTracker.myMiners.first().job = BuildingJob
+                        UnitTracker.myMiners.first().job = BuildingJob
                     } else {
-                        With.unitTracker.myUnits.first {it.canBuild(toBuild)}.build(buildQ.pop())
+                        UnitTracker.myUnits.first {it.canBuild(toBuild)}.build(buildQ.pop())
                     }
                 })
     }

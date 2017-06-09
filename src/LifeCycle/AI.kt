@@ -2,23 +2,20 @@ package LifeCycle
 
 import BuildOrder.BuildOrderExec
 import BuildOrder.Resources
-import Debug.Configuration
 import Debug.Overlays
 import Jobs.assignWorkers
 import Schedule.GameEvents
 import Tracking.UnitTracker
+import Tracking.removeDeadUnits
 import bwapi.Game
 import bwapi.Text.Size.Enum
 import bwta.BWTA
 
-object With {
+object AI {
 
-    lateinit var gameEvents : GameEvents
     lateinit var game : Game
-    lateinit var overlays : Overlays
     var myId : Int = -1
     lateinit var reserved : Resources
-    lateinit var buildOrderExec : BuildOrderExec
 
     fun newGame(g:Game) {
         game = g
@@ -29,19 +26,21 @@ object With {
         BWTA.analyze()
         println("analysis complete.")
 
-        gameEvents = GameEvents()
-        overlays = Overlays()
+        // clear all subscribers to all events
+        println("clear events")
+        GameEvents._events.forEach { it.clear() }
+        // resubscribe derived events
+        GameEvents._derivedEvents.forEach { it.init() }
+
         myId = game.self().id
         reserved = Resources(0,0,0)
-        buildOrderExec = BuildOrderExec()
-        assignWorkers()
-        Configuration.checkToggles()
-        Tracking.removeDeadUnits()
-    }
 
-    val unitTracker:UnitTracker
-        get() {
-            return gameEvents.unitTracker
-        }
+        // initialize subsystems
+        assignWorkers()
+        removeDeadUnits()
+        UnitTracker.init()
+        BuildOrderExec.init()
+        Overlays.init()
+    }
 
 }

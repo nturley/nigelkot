@@ -1,7 +1,8 @@
 package Jobs
 
 import BwapiWrappers.UnitInfo
-import LifeCycle.With
+import LifeCycle.AI
+import Schedule.GameEvents
 
 
 object MiningJob : Job("mining", 1) {
@@ -10,13 +11,15 @@ object MiningJob : Job("mining", 1) {
         // every ten frames, if you aren't mining,
         // find the nearest mineral field
         // and mine it
-        With.gameEvents.frame10.subscribe(
+        GameEvents.frame10.subscribe(
                 label(unitInfo),
-                condition = { !unitInfo.base.isGatheringMinerals },
+                condition = {
+                    !unitInfo.base.isGatheringMinerals
+                },
                 invoke = {
                     assert(unitInfo.job == MiningJob)
                     println(unitInfo.id.toString() + " start mining")
-                    val target = With.game.neutralUnits.filter { it.type.isMineralField }.minBy { it.getDistance(unitInfo.base) }
+                    val target = AI.game.neutralUnits.filter { it.type.isMineralField }.minBy { it.getDistance(unitInfo.base) }
                     unitInfo.base.gather(target)
                 })
     }

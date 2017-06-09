@@ -1,7 +1,7 @@
 package BuildOrder
 
 import BwapiWrappers.UnitInfo
-import LifeCycle.With
+import LifeCycle.AI
 import bwapi.TechType
 import bwapi.TilePosition
 import bwapi.UnitType
@@ -15,8 +15,8 @@ abstract class Buildable {
     abstract fun build(unitInfo: UnitInfo)
 
     fun canAfford():Boolean {
-        val self = With.game.self()
-        val reserved = With.reserved
+        val self = AI.game.self()
+        val reserved = AI.reserved
         val myCost = cost()
         if (self.minerals() - reserved.minerals < myCost.minerals) return false
         if (self.gas() - reserved.gas < myCost.gas) return false
