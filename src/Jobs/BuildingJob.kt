@@ -10,17 +10,17 @@ import bwapi.TilePosition
 import bwapi.UnitType
 
 
-object BuildingJob : Job("building", 2) {
+object BuildingJob : Job("building", 3) {
 
     override fun start(unitInfo: UnitInfo) {
         val myLabel = label(unitInfo)
         val me = unitInfo.id.toString()
         val unitMorphs = GameEvents.unitMorph
         val unitCompletes = GameEvents.unitComplete
+        val build = BuildOrderExec.buildQ.pop() as BuildUnit
 
         Schedule.run(myLabel) {
             println(me + " build")
-            val build = BuildOrderExec.buildQ.pop() as BuildUnit
             AI.reserved.add(build.cost())
             var buildLoc = getLocationAndCommandBuild(unitInfo, build)
 

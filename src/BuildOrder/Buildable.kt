@@ -14,6 +14,10 @@ abstract class Buildable {
     abstract fun canBuild(unitInfo: UnitInfo):Boolean
     abstract fun build(unitInfo: UnitInfo)
 
+    open fun supplyProvided(): Int {
+        return 0
+    }
+
     fun canAfford():Boolean {
         val self = AI.game.self()
         val reserved = AI.reserved
@@ -44,6 +48,14 @@ class BuildUnit(val unitType:bwapi.UnitType) : Buildable() {
     override fun build(unitInfo: UnitInfo) {
         unitInfo.base.train(unitType)
     }
+
+    override fun supplyProvided(): Int {
+        return unitType.supplyProvided()
+    }
+
+    override fun toString(): String {
+        return unitType.toString()
+    }
 }
 
 class BuildTech(val techType: TechType) : Buildable() {
@@ -62,6 +74,10 @@ class BuildTech(val techType: TechType) : Buildable() {
     override fun build(unitInfo: UnitInfo) {
         unitInfo.base.research(techType)
     }
+
+    override fun toString(): String {
+        return techType.toString()
+    }
 }
 
 class BuildUpgrade(val upgradeType: UpgradeType, val level:Int): Buildable() {
@@ -79,5 +95,9 @@ class BuildUpgrade(val upgradeType: UpgradeType, val level:Int): Buildable() {
 
     override fun build(unitInfo: UnitInfo) {
         unitInfo.base.upgrade(upgradeType)
+    }
+
+    override fun toString(): String {
+        return upgradeType.toString()
     }
 }

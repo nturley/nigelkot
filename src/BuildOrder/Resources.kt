@@ -14,4 +14,8 @@ class Resources (var minerals:Int, var gas:Int, var supply:Int) {
         gas -= other.gas
         supply -= other.supply
     }
+
+    override fun toString(): String {
+        return "min: " + minerals + ", gas: "+gas+", supply: "+supply
+    }
 }

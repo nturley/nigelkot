@@ -1,4 +1,5 @@
 package Debug
+import BuildOrder.BuildOrderExec
 import BwapiWrappers.UnitInfo
 import LifeCycle.AI
 import Schedule.GameEvents
@@ -10,6 +11,14 @@ object Overlays {
             val g = AI.game
             val myUnits = UnitTracker.knownUnits.values.filter { it.base.player.id == AI.myId }
             myUnits.forEach { g.drawTextMap(it.base.left, it.base.bottom, getUnitStr(it)) }
+            g.drawTextScreen(10,10,AI.reserved.toString())
+
+            val buildQStr = BuildOrderExec.buildQ
+                    .filterIndexed { index, buildable -> index < 10 }
+                    .map { it.toString() }
+                    .joinToString("\n")
+            g.drawTextScreen(10,20,buildQStr)
+
         })
     }
 

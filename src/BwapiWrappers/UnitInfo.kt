@@ -12,6 +12,8 @@ class UnitInfo (val id:Int, val base :bwapi.Unit) {
             value.start(this)
         }
 
+    var targetUnit:UnitInfo? = null
+
     fun canBuild(buildable: Buildable):Boolean {
         if (base.isTraining || base.isUpgrading || base.isResearching || base.isMorphing) return false
         return buildable.canBuild(this)

@@ -3,6 +3,7 @@ package Jobs
 import BwapiWrappers.UnitInfo
 import LifeCycle.AI
 import Schedule.GameEvents
+import Tracking.UnitTracker
 
 fun assignWorkers() {
     println("assign workers")
@@ -16,6 +17,20 @@ fun assignWorkers() {
             },
             invoke = { worker : UnitInfo ->
                 worker.job = MiningJob
+            }
+    )
+
+    GameEvents.unitComplete.subscribeWithArg(
+            label="assign workers",
+            condition = {
+                it.base.type.isRefinery && it.base.player.id == AI.myId
+            },
+            invoke = { refinery : UnitInfo ->
+                UnitTracker.myMiners.slice(0..2).forEach {
+                    it.targetUnit = refinery
+                    it.job = HarvestGasJob
+                }
+
             }
     )
 }

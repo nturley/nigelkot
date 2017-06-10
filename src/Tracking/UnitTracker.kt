@@ -1,6 +1,7 @@
 package Tracking
 
 import BwapiWrappers.UnitInfo
+import Jobs.IdleJob
 import Jobs.MiningJob
 import LifeCycle.AI
 import Schedule.Event
@@ -21,6 +22,13 @@ object UnitTracker {
                 }
             }, priority = Event.OBSERVE)
         }
+        GameEvents.unitDestroy.subscribeWithArg("removeDead",
+                invoke = {
+                    println(it.id.toString() + " died")
+                    it.job = IdleJob
+                    knownUnits.remove(it.id)
+                },
+                priority=Event.CLEANUP_DATA)
     }
 
     val myUnits : List<UnitInfo>

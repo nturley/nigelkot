@@ -2,11 +2,11 @@ package LifeCycle
 
 import BuildOrder.BuildOrderExec
 import BuildOrder.Resources
+import BuildOrder.startingBuildOrder
 import Debug.Overlays
 import Jobs.assignWorkers
 import Schedule.GameEvents
 import Tracking.UnitTracker
-import Tracking.removeDeadUnits
 import bwapi.Game
 import bwapi.Text.Size.Enum
 import bwta.BWTA
@@ -37,7 +37,6 @@ object AI {
 
         // initialize subsystems
         assignWorkers()
-        removeDeadUnits()
         UnitTracker.init()
         BuildOrderExec.init()
         Overlays.init()
