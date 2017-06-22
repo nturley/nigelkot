@@ -20,6 +20,7 @@ fun assignWorkers() {
             }
     )
 
+    // everytime a refinery is built, assign three miners to harvest from it
     GameEvents.unitComplete.subscribeWithArg(
             label="assign workers",
             condition = {

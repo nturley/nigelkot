@@ -11,9 +11,9 @@ object Overlays {
             val g = AI.game
             val myUnits = UnitTracker.knownUnits.values.filter { it.base.player.id == AI.myId }
             myUnits.forEach { g.drawTextMap(it.base.left, it.base.bottom, getUnitStr(it)) }
-            g.drawTextScreen(10,10,AI.reserved.toString())
+            g.drawTextScreen(10, 10, "Reserved: " + AI.reserved.toString())
 
-            val buildQStr = BuildOrderExec.buildQ
+            val buildQStr = BuildOrderExec.toBuildQ
                     .filterIndexed { index, buildable -> index < 10 }
                     .map { it.toString() }
                     .joinToString("\n")

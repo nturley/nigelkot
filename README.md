@@ -63,24 +63,19 @@ This class caches a value that is invalidated on an event. This is useful for av
 
 Example
 ```kotlin
-fun access() :Int {
-    accesses += 1
-    return accesses
-}
-
 fun example() {
     val e : Event<Unit> = Event("e")
     var accesses : Int = 0
-    val accessCache : Cached<Int> = Cached({ access() }, e)
-    
-    assert( accesses == 0)
-    assert( accessCache() == 1)
-    assert( accesses == 1)
-    assert( accessCache() == 1)
+    val cache = Cached(e) {
+       accesses += 1
+       accesses
+    }
+    assert( cache() == 1)
+    assert( cache() == 1)
+    // invalidate the cache
     e(Unit)
-    assert( acesses == 1)
-    assert( accessCache() == 2)
-    assert( acesses == 2)
+    assert( cache() == 2)
+    assert( cache() == 2)
 }
 ```
 

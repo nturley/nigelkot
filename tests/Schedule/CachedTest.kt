@@ -5,7 +5,7 @@ import org.junit.Test
 class CachedTest {
     val e : Event<Unit> = Event("e")
     var a : Int = 0
-    val c : Cached<Int> = Cached({ incr() }, e)
+    val c : Cached<Int> = Cached(e) { incr() }
 
     fun incr() :Int {
         a += 1

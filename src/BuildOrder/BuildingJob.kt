@@ -1,8 +1,10 @@
-package Jobs
+package BuildOrder
 
-import BuildOrder.BuildOrderExec
-import BuildOrder.BuildUnit
 import BwapiWrappers.UnitInfo
+import Intelligence.MapTools
+import Jobs.IdleJob
+import Jobs.Job
+import Jobs.MiningJob
 import LifeCycle.AI
 import Schedule.GameEvents
 import Schedule.Until
@@ -17,7 +19,8 @@ object BuildingJob : Job("building", 3) {
         val me = unitInfo.id.toString()
         val unitMorphs = GameEvents.unitMorph
         val unitCompletes = GameEvents.unitComplete
-        val build = BuildOrderExec.buildQ.pop() as BuildUnit
+        val build = BuildOrderExec.toBuildQ.pop() as BuildUnit
+        BuildOrderExec.inProgress.add(build)
 
         Schedule.run(myLabel) {
             println(me + " build")
@@ -39,6 +42,7 @@ object BuildingJob : Job("building", 3) {
                     yield( Until( unitMorphs, { it.base.tilePosition == buildLoc && it.base.type == build.unitType }))
                     // unreserve the cost
                     AI.reserved.subtract(build.cost())
+                    unitInfo.job = IdleJob
                 }
                 UnitType.Protoss_Probe -> {
                     var startEvent = GameEvents.unitCreate
@@ -57,7 +61,7 @@ object BuildingJob : Job("building", 3) {
                         targetID = it.id
                         it.base.buildUnit != null && it.base.buildUnit.id == unitInfo.id
                     }))
-                    println(targetID.toString() + "is being built")
+                    println(targetID.toString() + " is being built")
                     AI.reserved.subtract(build.cost())
                     yield( Until( unitCompletes, { it.id == targetID }))
                     println("finished building " + targetID.toString())
@@ -67,10 +71,25 @@ object BuildingJob : Job("building", 3) {
         }
     }
 
-    fun getLocationAndCommandBuild(unitInfo: UnitInfo, build:BuildUnit): TilePosition {
-        val loc = AI.game.getBuildLocation(build.unitType, AI.game.self().startLocation)
-        unitInfo.base.build(build.unitType, loc)
+    fun getLocationAndCommandBuild(unitInfo: UnitInfo, build: BuildUnit): TilePosition {
+        val area = build.area
+        var searchPos = AI.game.self().startLocation
+        if (area == BuildArea.NATURAL) {
+            val candidates = MapTools.findNeighboringBasePositions()
+            if (candidates.isNotEmpty()) searchPos = candidates[0].base.tilePosition
+        } else if (area ==  BuildArea.NATURAL_CHOKE) {
+            val mainChokes = AI.startRegion.chokes()
+            val naturalChokes = AI.startRegion.neighbors().first().chokes().filter { !mainChokes.contains(it) }
+            searchPos = naturalChokes.first().toTilePosition()
+        }
+        val loc = AI.game.getBuildLocation(build.unitType, searchPos)
+        if (unitInfo.base.position.getApproxDistance(loc.toPosition()) > 800) {
+            println("move to build position")
+            unitInfo.base.move(loc.toPosition())
+        } else {
+            println("build " + build.unitType.toString())
+            unitInfo.base.build(build.unitType, loc)
+        }
         return loc
     }
-
 }

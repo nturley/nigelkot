@@ -1,6 +1,6 @@
 package Schedule
 
-class Cached<out T> (private val get: () -> T, event: iEvent = Event.Never) {
+class Cached<out T> (event: iEvent = Event.Never, private val get: () -> T) {
     private var t : T? = null
     init {
         event.subscribe("cache", {t = null}, priority = Event.CACHE_REFRESH)

@@ -2,11 +2,16 @@ package BuildOrder
 
 import BwapiWrappers.UnitInfo
 import LifeCycle.AI
+import Schedule.GameEvents
+import Schedule.Until
 import bwapi.TechType
 import bwapi.TilePosition
 import bwapi.UnitType
 import bwapi.UpgradeType
 
+enum class BuildArea {
+    MAIN, MAIN_CHOKE, NATURAL, NATURAL_CHOKE, EXPAND, CONTAIN, SNEAK
+}
 
 abstract class Buildable {
     abstract fun cost():Resources
@@ -29,9 +34,7 @@ abstract class Buildable {
     }
 }
 
-class BuildUnit(val unitType:bwapi.UnitType) : Buildable() {
-
-    var targetPos : TilePosition? = null
+class BuildUnit(val unitType:bwapi.UnitType, val area:BuildArea = BuildArea.MAIN) : Buildable() {
 
     override fun cost(): Resources {
         return Resources(unitType.mineralPrice(), unitType.gasPrice(), unitType.supplyRequired())
@@ -42,11 +45,24 @@ class BuildUnit(val unitType:bwapi.UnitType) : Buildable() {
     }
 
     override fun canBuild(unitInfo: UnitInfo): Boolean {
+        if (unitType.isAddon) {
+            return unitInfo.base.canBuild(unitType)
+        }
         return unitInfo.base.canTrain(unitType)
     }
 
     override fun build(unitInfo: UnitInfo) {
-        unitInfo.base.train(unitType)
+        if (unitType.isAddon) {
+            Schedule.run("build addon") {
+                while (unitInfo.base.isIdle) {
+                    unitInfo.base.buildAddon(unitType)
+                    yield(Until(GameEvents.frame))
+                }
+            }
+
+        } else {
+            unitInfo.base.train(unitType)
+        }
     }
 
     override fun supplyProvided(): Int {

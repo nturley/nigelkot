@@ -22,4 +22,8 @@ class UnitInfo (val id:Int, val base :bwapi.Unit) {
     fun build(buildable: Buildable) {
         buildable.build(this)
     }
+
+    fun gather(unitInfo: UnitInfo) {
+        base.gather(unitInfo.base)
+    }
 }

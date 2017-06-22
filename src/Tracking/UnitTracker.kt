@@ -11,14 +11,17 @@ import Schedule.GameEvents
 object UnitTracker {
     val knownUnits : MutableMap<Int, UnitInfo> = mutableMapOf()
 
+    fun get(u:bwapi.Unit) : UnitInfo {
+        val id = u.id
+        return knownUnits.getOrPut(id, { UnitInfo(id, u) })
+    }
+
     fun init() {
         knownUnits.clear()
         GameEvents._unitEvents.forEach { pair: Pair <Event <bwapi.Unit?>, Event <UnitInfo> > ->
             pair.first.subscribeWithArg("unit wrapper",invoke = {u:bwapi.Unit? ->
                 if (u != null) {
-                    val id = u.id
-                    val unitInfo = knownUnits.getOrPut(id, { UnitInfo(id, u) })
-                    pair.second(unitInfo)
+                    pair.second(get(u))
                 }
             }, priority = Event.OBSERVE)
         }
